@@ -1,0 +1,16 @@
+﻿@page "/counter"
+@page "/"
+@inject IOrchestrator Orchestrator
+
+@body
+
+<button class="btn btn-primary" @onclick="RunSuiteAsync">Run Suite Async</button>
+
+@code {
+    string body = "not runned";
+    private async Task RunSuiteAsync()
+    {
+      var report = await Orchestrator.RunAsync("BitBucket Measurement", CancellationToken.None);
+      body = report.ToJson();
+    }
+}
